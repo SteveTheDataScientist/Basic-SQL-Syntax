@@ -1,0 +1,88 @@
+# This project uses SQL Lite 3 as its SQL server #
+
+# Make sure to open the query window, as well as the little book icon in the right hand side of the screen before querying. This opens up both the query writing screen and a split screen mode option for the user. #
+
+# Always make sure that the INSERT INTO command is followed by a table name. #
+
+INSERT INTO Product
+VALUES (377,'Outdoor 2-Gallon CoolerPack','ny10',20.20,'2020-05-15')
+
+INSERT INTO Product
+VALUES (376,'Outdoor 1-Gallon CoolerPack','ny10',15.99,'2020-05-15')
+
+# This example is an intentional mistake meant to practice code editing. #
+
+INSERT INTO Products
+VALUES (400,'Canoe Pack',cv11,$72.99,2020-22-22')
+
+# The first error with this code when I tried to run it was the '$'. This needs to be deleted. #
+
+INSERT INTO Products
+VALUES (400,'Canoe Pack',cv11,72.99,2020-22-22')
+
+# Next, there is a missing quote before 2020. I add that in to continue the line repair. #
+
+INSERT INTO Products
+VALUES (400,'Canoe Pack',cv11,72.99,'2020-22-22')
+
+# Ope! I realize that I named the table 'Products' instead of the correct 'Product'. I edit that to continue. #
+
+INSERT INTO Product
+VALUES (400,'Canoe Pack',cv11,72.99,'2020-22-22')
+
+# Not there yet! cv11 is registered as a column since it doesn't have any quotes around it. By putting '' around it, it goes back to being a character field. #
+
+INSERT INTO Product
+VALUES (400,'Canoe Pack','cv11',72.99,'2020-22-22')
+
+# The final error when running this query is the missing UNIQUE constraint. The table already has a value with 400 in it! In order to fix this, I changed it to 401, which was a new value. #
+
+INSERT INTO Product
+VALUES (401,'Canoe Pack','cv11',72.99,'2020-22-22')
+
+# It runs good as new now! :D #
+
+UPDATE Product
+SET prodcost = (prodcost*1.07)
+
+UPDATE Supplier
+SET supcompanyname = 'Fergus Textiles'
+WHERE supID = 22
+
+# Note: The WHERE clause is vital to the successful update of this query. WHERE limits the lines being changed. In this case, limiting our WHERE to the original company name ensures that we don't accidentally change the entire table to 'Fergus Textiles.' #
+
+CREATE TABLE Customer
+(CustID  interger primary key,
+CustLastName  char(20),
+CustFirstName  char(15),
+CustDiscount  decimal(5,2)
+);
+
+INSERT INTO Customer
+VALUES
+(22000,'Jonas','Ricky', 0),
+(33000,'Chow','Mickey', 5),
+(42000,'Victoria','Elvia', 0)
+(53000,'Fagbemi','Wana', 5),
+(60000,'Rose','Robert John', 5)
+;
+
+# This can be saved as a text file ending in .sql and loaded into a SQL server query to be run. #
+
+# Make sure that the INSERT INTO command is always closed out with a VALUES command. VALUES represents the number of fields in each table. #
+
+DELETE
+FROM Customer
+WHERE CustID = 22000
+
+# Note: Without the "WHERE" clause, the DELETE command would remove ALL of the rows from the table! BE SPECIFIC! #
+
+DELETE
+FROM Customer
+WHERE CustDiscount = 5
+
+DROP TABLE Customer
+
+# DROP TABLE will completely delete the table that is specified. Make sure to check whether you want to delete a row or the entire table before proceeding. #
+
+# Most companies work hard to keep backups of all their data. This serves as an insurance policy in case someone accidentally deletes all of their information. #
